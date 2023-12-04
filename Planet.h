@@ -59,6 +59,11 @@ public:
         return dist;
     }
 
+    double get_distance(double x, double y, double z) const {
+        double dist = sqrt(pow(this->x - x, 2) + pow(this->y - y, 2) + pow(this->z - z, 2));
+        return dist;
+    }
+
     double get_density() const {
         double dens = mass / volume;
         return dens;
@@ -68,27 +73,35 @@ public:
         this->name = new char[std::strlen(name)];
         std::strcpy(this->name, name);
     }
+
     void set_x(double x) {
         this->x = x;
     }
+
     void set_y(double y) {
         this->y = y;
     }
+
     void set_z(double z) {
         this->z = z;
     }
+
     void set_mass(double mass) {
         this->mass = mass;
     }
+
     void set_volume(double volume) {
         this->volume = volume;
     }
+
     void set_livable(bool livable) {
         this->livable = livable;
     }
 };
 
-
+//Sortings
 void sort_by_density(Planet *planets, size_t n);
+int closer_than(double x, double y, double z, Planet *planets, size_t n, double distance);
+double livable_average_mass(Planet *planets, size_t n);
 
 #endif //CPP_LAB_5_6_PLANET_H

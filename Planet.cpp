@@ -26,7 +26,8 @@ Planet::Planet(const Planet &other) //copy constructor
     std::strcpy(name, other.name);
 }
 
-Planet::Planet(char *name, double x, double y, double z, double volume, double mass, bool livable) {
+Planet::Planet(char *name, double x, double y, double z, double mass, double volume, bool livable)
+{
     this->x = x;
     this->y = y;
     this->z = z;
@@ -60,15 +61,43 @@ Planet& Planet::operator=(const Planet &other)
 }
 
 
-//Sorting
+//Sortings
 void sort_by_density(Planet *planets, size_t n)
 {
     for (size_t i = 0; i < n - 1; i++)
-        for (size_t j = 0; j < n - i - 1; j++) {
+        for (size_t j = 0; j < n - i - 1; j++)
+        {
             double dens1 = planets[j].get_density();
             double dens2 = planets[j + 1].get_density();
-            if (dens1 > dens2) {
+            if (dens1 > dens2)
+            {
                 std::swap(planets[j], planets[j + 1]);
             }
         }
+}
+
+int closer_than(double x, double y, double z, Planet *planets, size_t n, double distance)
+{
+    int k = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        if (planets[i].get_distance(x, y, z) < distance)
+            ++k;
+    }
+    return k;
+}
+
+double livable_average_mass(Planet *planets, size_t n)
+{
+    double total_mass = 0;
+    int k = 0;
+    for (size_t i = 0; i < n; i++)
+    {
+        if (planets[i].get_livable() == true)
+        {
+            ++k;
+            total_mass += planets[i].get_mass();
+        }
+    }
+    return total_mass / k;
 }
