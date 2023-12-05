@@ -3,6 +3,7 @@
 //
 #include <cstring>
 #include <cmath>
+#include <iostream>
 #ifndef CPP_LAB_5_6_PLANET_H
 #define CPP_LAB_5_6_PLANET_H
 
@@ -19,7 +20,7 @@ public:
 
     Planet(const Planet &); //copy constructor
 
-    Planet(char *name, double x, double y, double z, double volume, double weight, bool livable);
+    Planet(char *name, double x, double y, double z, double mass, double volume, bool livable);
 
     ~Planet(); //destructor
 
@@ -59,8 +60,8 @@ public:
         return dist;
     }
 
-    double get_distance(double x, double y, double z) const {
-        double dist = sqrt(pow(this->x - x, 2) + pow(this->y - y, 2) + pow(this->z - z, 2));
+    double get_distance(double newX, double newY, double newZ) const {
+        double dist = sqrt(pow(this->x - newX, 2) + pow(this->y - newY, 2) + pow(this->z - newZ, 2));
         return dist;
     }
 
@@ -69,33 +70,33 @@ public:
         return dens;
     }
 
-    inline void set_name(char* name) {
-        this->name = new char[std::strlen(name)];
-        std::strcpy(this->name, name);
+    inline void set_name(char* newName) {
+        this->name = new char[std::strlen(newName)];
+        std::strcpy(this->name, newName);
     }
 
-    void set_x(double x) {
-        this->x = x;
+    void set_x(double newX) {
+        this->x = newX;
     }
 
-    void set_y(double y) {
-        this->y = y;
+    void set_y(double newY) {
+        this->y = newY;
     }
 
-    void set_z(double z) {
-        this->z = z;
+    void set_z(double newZ) {
+        this->z = newZ;
     }
 
-    void set_mass(double mass) {
-        this->mass = mass;
+    void set_mass(double newMass) {
+        this->mass = newMass;
     }
 
-    void set_volume(double volume) {
-        this->volume = volume;
+    void set_volume(double newVolume) {
+        this->volume = newVolume;
     }
 
-    void set_livable(bool livable) {
-        this->livable = livable;
+    void set_livable(bool newLivable) {
+        this->livable = newLivable;
     }
 };
 
@@ -103,5 +104,8 @@ public:
 void sort_by_density(Planet *planets, size_t n);
 int closer_than(double x, double y, double z, Planet *planets, size_t n, double distance);
 double livable_average_mass(Planet *planets, size_t n);
+
+//Output
+std::ostream & operator<<(std::ostream &o, const Planet &p);
 
 #endif //CPP_LAB_5_6_PLANET_H
