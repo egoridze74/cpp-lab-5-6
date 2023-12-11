@@ -3,13 +3,14 @@
 //
 #include <cstring>
 #include <cmath>
+#include <string>
 #include <iostream>
 #ifndef CPP_LAB_5_6_PLANET_H
 #define CPP_LAB_5_6_PLANET_H
 
 class Planet {
 private:
-    char *name;
+    std::string name;
     double x, y, z;
     double mass;
     double volume;
@@ -20,14 +21,15 @@ public:
 
     Planet(const Planet &); //copy constructor
 
-    Planet(char *name, double x, double y, double z, double mass, double volume, bool livable);
+    Planet(std::string name, double x, double y, double z, double mass, double volume, bool livable);
 
-    ~Planet(); //destructor
+    ~Planet() //destructor
+    {};
 
     Planet& operator=(const Planet &other);
 
     //Getters, setters
-    inline const char* get_name() const {
+    inline std::string get_name() const{
         return name;
     }
 
@@ -70,9 +72,8 @@ public:
         return dens;
     }
 
-    inline void set_name(char* newName) {
-        this->name = new char[std::strlen(newName)];
-        std::strcpy(this->name, newName);
+    inline void set_name(std::string newName) {
+        this->name = newName;
     }
 
     void set_x(double newX) {
@@ -103,7 +104,7 @@ public:
 //Sortings
 void sort_by_density(Planet *planets, size_t n);
 int closer_than(double x, double y, double z, Planet *planets, size_t n, double distance);
-double livable_average_mass(Planet *planets, size_t n);
+
 
 //Output
 std::ostream & operator<<(std::ostream &o, const Planet &p);
