@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Planet.h"
+#include "Planet.cpp"
 
 int main() {
     std::cout << "Create planets" << std::endl;
@@ -19,15 +20,15 @@ int main() {
     Planet planets[] = {planet1, planet2, planet3, planet4, planet5, planet6, planet7, planet8, planet9};
     std::cout << "Unsorted list:" << std::endl;
     for (int i = 0; i < 9; i++)
-        std::cout << i + 1 << ". " << planets[i].get_name() << "    density: " << planets[i].get_density() << std::endl;
+        std::cout << i + 1 << ". " << planets[i].get_name() << " density: " << planets[i].get_density() << std::endl;
 
     sort_by_density(planets, 9);
     std::cout << "Sorted list:" << std::endl;
     for (int i = 0; i < 9; i++)
-        std::cout << i + 1 << ". " << planets[i].get_name() << "    density: " << planets[i].get_density() << std::endl;
+        std::cout << i + 1 << ". " << planets[i].get_name() << " density: " << planets[i].get_density() << std::endl;
 
     std::cout << "Number of planets closer to X(20, 20, 20) than 50 conventional units:" << std::endl;
-    std:: cout << closer_than(20, 20, 20, planets, 9, 50) << std::endl;
+    std::cout << closer_than(20, 20, 20, planets, 9, 50) << std::endl;
 
     std::cout << "Livable planets average mass:" << std::endl;
     std::cout << livable_average_mass(planets, 9) << std::endl;
